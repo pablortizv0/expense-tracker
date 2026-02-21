@@ -45,6 +45,15 @@ def add_expense():
     conn.close()
     return redirect("/")
 
+@app.route("/delete/<int:expense_id>", methods=["POST"])
+def delete_expense(expense_id):
+    conn = sqlite3.connect("expenses.db")
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM expenses WHERE id = ?", (expense_id,))
+    conn.commit()
+    conn.close()
+    return redirect("/")
+
 if __name__ == "__main__":
     init_db()
     app.run(debug=True)

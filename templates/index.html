@@ -33,6 +33,7 @@
             cursor: pointer;
         }
         button:hover { background-color: #45a049; }
+        td form { margin: 0; }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -86,6 +87,7 @@
             <th>Category</th>
             <th>Amount</th>
             <th>Date</th>
+            <th></th>
         </tr>
         {% for expense in expenses %}
         <tr>
@@ -93,6 +95,11 @@
             <td>{{ expense[2] }}</td>
             <td>${{ "%.2f"|format(expense[3]) }}</td>
             <td>{{ expense[4] }}</td>
+            <td>
+                <form action="/delete/{{ expense[0] }}" method="POST">
+                    <button type="submit" style="background-color: #e74c3c; width: auto; padding: 5px 10px;">Delete</button>
+                </form>
+            </td>
         </tr>
         {% endfor %}
     </table>
